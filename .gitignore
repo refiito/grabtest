@@ -1,0 +1,7 @@
+/cookbooks/
+/tmp
+.chef
+.kitchen/
+.kitchen.local.yml
+.librarian
+/tmp/librarian/

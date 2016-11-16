@@ -1,0 +1,23 @@
+---
+driver:
+  name: gce
+  project: grab-test-149610
+  image_name: ubuntu-1610-yakkety-v20161020
+  zone: us-east1-c
+  machine_type: n1-standard-1
+  preemptible: true
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-16.10
+
+transport:
+  username: "ubuntu"
+
+suites:
+  - name: default
+    run_list:
+      - role[dbserver]
+    attributes:
