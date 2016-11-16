@@ -20,7 +20,7 @@ aws_subnet "testjob-margus-vpc-subnet-2" do
   availability_zone "us-east-1b"
 end
 
-aws_rds_subnet_group "testjob-margus-subnet-group" do
+aws_rds_subnet_group "testjob-margus-rds-group" do
   description "subnet_group_for_rds"
   subnets ["testjob-margus-vpc-subnet", "testjob-margus-vpc-subnet-2"]
 end
@@ -39,7 +39,7 @@ rds_instance = aws_rds_instance "testjob-margus-rds-instance" do
   master_username "thechief"
   master_user_password "securesecure" # 2x security
   multi_az false
-  db_subnet_group_name "testjob-margus-subnet-group"
+  db_subnet_group_name "testjob-margus-rds-group"
   additional_options(db_name: "gtest", availability_zone: "us-east-1c")
 end
 
@@ -85,5 +85,5 @@ lb = load_balancer "testjob-margus-elb" do
   )
 end
 
-puts lb.inspect
-puts lb.aws_object.dns_name unless lb.nil?
+#puts lb.inspect
+#puts lb.aws_object.dns_name unless lb.nil?
