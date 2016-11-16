@@ -7,7 +7,12 @@ git "/opt/testapp" do
 end
 
 bash 'compile-app' do
-  code "GOPATH=/opt/go cd /opt/testapp && /usr/local/go/bin/go get && /usr/local/go/bin/go build -o testapp"
+  environment ({
+    'GOROOT' => "#{node['go']['install_dir']}/go",
+    'GOBIN'  => '$GOROOT/bin',
+    'GOPATH' => '/opt/go'
+  })
+  code "cd /opt/testapp && /usr/local/go/bin/go get && /usr/local/go/bin/go build -o testapp"
   action :run
   only_if {not ::File.exist?('/opt/testapp/testapp')}
 end
