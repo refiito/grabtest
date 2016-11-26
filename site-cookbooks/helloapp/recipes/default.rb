@@ -6,7 +6,7 @@ testapp_location = node['testapp']['install_dir']
 testapp_config_location = node['testapp']['config_location']
 testapp_binary_location = node['testapp']['binary_location']
 goroot_location = ::File.expand_path("go", node['go']['install_dir'])
-goexec_location = ::File.expand_path("bin/go", node['go']['install_dir'])
+goexec_location = ::File.expand_path("bin/go", goroot_location)
 gobin_location = node['go']['gobin']
 gopath_location = node['go']['gopath']
 
