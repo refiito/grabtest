@@ -22,3 +22,15 @@ attribute 'postgres/user',
 attribute 'postgres/database',
   :display_name => 'DB database',
   :default => nil
+
+attribute 'testapp/install_dir',
+  display_name: "Testapp clone directory, defaults to /opt/testapp",
+  default: "/opt/testapp"
+
+attribute 'testapp/config_location',
+  display_name: "Testapp config location, defaults to /opt/testapp/testapp.conf",
+  default: "/opt/testapp/testapp.conf"
+
+attribute 'testapp/binary_loction',
+  display_name: "Testapp binary build location, defaults to /opt/testapp/testapp",
+  default: "/opt/testapp/testapp"
