@@ -7,6 +7,16 @@ aws_vpc "testjob-margus-vpc" do
   main_routes '0.0.0.0/0' => :internet_gateway
 end
 
+aws_security_group "testjob-margus-security-group" do
+  inbound_rules '0.0.0.0/0' => [ 22, 80 ]
+  outbound_rules [
+    {:port => 22, :protocol => :tcp, :destinations => ['0.0.0.0/0'] },
+    {:port => 80, :protocol => :tcp, :destinations => ['0.0.0.0/0'] },
+    {:port => 443, :protocol => :tcp, :destinations => ['0.0.0.0/0'] },
+  ]
+  vpc "testjob-margus-vpc"
+end
+
 aws_subnet "testjob-margus-vpc-subnet" do
   vpc "testjob-margus-vpc"
   cidr_block "10.0.0.0/26"
@@ -85,5 +95,4 @@ lb = load_balancer "testjob-margus-elb" do
   )
 end
 
-#puts lb.inspect
 #puts lb.aws_object.dns_name unless lb.nil?
