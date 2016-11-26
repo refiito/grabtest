@@ -50,6 +50,8 @@ service "testapp" do
   action :start
 end
 
+resources("template[#{node['nginx']['dir']}/sites-available/default]").cookbook 'helloapp'
+
 file "#{node['nginx']['default_root']}/index.html" do
   content 'Just a placeholder for now'
 end
